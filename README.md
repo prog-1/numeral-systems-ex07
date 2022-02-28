@@ -29,7 +29,7 @@ Write tests for the function.
 {-1000_0000_0000_0001, "1111111111111100011100101000000101011011001110010111111111111111"},
 ```
 
-## Task 2: Binary Numbers Sum
+## Task 2: Sum of Binary Numbers
 
 Write a function that returns a sum of two integers that are encoded as base-2
 values of type `string`. Assume that the integers are represented using 64 bits.
