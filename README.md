@@ -12,7 +12,7 @@ Write a function that returns a machine representation (returned as a value of
 type `string`) of a signed integer of type `int64`. The function signature:
 
 ```go
-func NumToBin(int64 num) string
+func NumToBin(num int64) string
 ```
 
 Write tests for the function.
@@ -36,7 +36,7 @@ values of type `string`. Assume that the integers are represented using 64 bits.
 The function signature:
 
 ```go
-func BinNumSum(string a, b) string
+func BinNumSum(a, b string) string
 ```
 
 Write tests for the function.
