@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func decimalToBinary(number int64) (s string) {
-	fmt.Println(number)
+
 	if number == 0 {
 		return "0"
 	}
@@ -37,6 +37,26 @@ func LongAdd(a, b string) string {
 	}
 	return string(res)
 }
+func BinNumSum(a, b string) (s string) {
+	st := LongAdd(a, b)
+	if len(st) > 64 {
+		var tmp string
+		for i := 64; i > 0; i-- {
+			if st[i] == '0' {
+				tmp += "0"
+			} else {
+				s = fmt.Sprint(tmp, s)
+				s = fmt.Sprint(string(st[i]), s)
+			}
+
+		}
+		if len(s) == 0 {
+			return "0"
+		}
+		return s
+	}
+	return st
+}
 func NumToBin(num int64) (s string) {
 	switch {
 	case num >= 0:
@@ -44,10 +64,6 @@ func NumToBin(num int64) (s string) {
 	default:
 		var st string
 		st = LongAdd("1111111111111111111111111111111111111111111111111111111111111111", decimalToBinary(num*(-1)))
-		// if num != -1 {
-		// 	st = LongAdd(st, "1")
-		// }
-		fmt.Println(st)
 		if len(st) > 64 {
 			for i := 64; i > 0; i-- {
 				if st[i] == '0' {
@@ -63,5 +79,5 @@ func NumToBin(num int64) (s string) {
 }
 
 func main() {
-	fmt.Println(NumToBin(-512))
+
 }

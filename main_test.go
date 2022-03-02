@@ -4,8 +4,8 @@ import "testing"
 
 func TestNumToBin(t *testing.T) {
 	for _, tc := range []struct {
-		num    int64
-		result string
+		num  int64
+		want string
 	}{
 
 		{0, "0"},
@@ -17,8 +17,27 @@ func TestNumToBin(t *testing.T) {
 		{-1000_0000_0000_0001, "1111111111111100011100101000000101011011001110010111111111111111"},
 	} {
 		t.Run("", func(t *testing.T) {
-			if got := NumToBin(tc.num); got != tc.result {
-				t.Errorf("LongAdd(%v) = %v, want %v", tc.num, got, tc.result)
+			if got := NumToBin(tc.num); got != tc.want {
+				t.Errorf("LongAdd(%v) = %v, want %v", tc.num, got, tc.want)
+			}
+		})
+	}
+}
+func TestSum(t *testing.T) {
+	for _, tc := range []struct {
+		a    string
+		b    string
+		want string
+	}{
+		{"1", "11", "100"},
+		{"0", "0", "0"},
+		{"11001" /* 25 */, "1111111111111111111111111111111111111111111111111111111111110010" /* -14 */, "1011" /* 11 */},
+		{"1111111111111111111111111111111111111111111111111111111111110110", "111" /* 7 */, "1111111111111111111111111111111111111111111111111111111111111101" /* -3 */},
+		{"11" /* 3 */, "1111111111111111111111111111111111111111111111111111111111111101" /* -3 */, "0" /* 0 */},
+	} {
+		t.Run("", func(t *testing.T) {
+			if got := BinNumSum(tc.a, tc.b); got != tc.want {
+				t.Errorf("LongAdd(%v, %v) = %v, want %v", tc.a, tc.b, got, tc.want)
 			}
 		})
 	}
