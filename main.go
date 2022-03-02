@@ -2,28 +2,34 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 )
 
-// func delzeros(res string) string {
-// 	for len(res) > 64 {
-// 		res = strings.TrimLeft(string(res), "10")
-// 		if len(res) == 64 {
-// 			res = strings.TrimPrefix(string(res), "0")
-// 		}
-// 	}
-// 	return res
-// }
+const base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-// func delzeros(res string) string {
-// 	if len(res) > 64 {
-// 		res = strings.TrimLeft(res, "10")
-// 		if len(res) == 64 {
-// 			res = strings.TrimPrefix(res, "0")
-// 		}
-// 	}
-// 	return res
-// }
+func NumToBin(num int64) (convert string) {
+	if num < 0 {
+		//will be done soon
+	}
+	if num == 0 {
+		return "0"
+	}
+	var z int64
+	var number float64
+	for number <= float64(num) {
+		z++
+		number = math.Pow(2, float64(z))
+	}
+	number /= float64(2)
+	for z > 0 {
+		z--
+		convert += string(base36[int(num/int64(number))])
+		num %= int64(number)
+		number /= 2
+	}
+	return convert
+}
 
 func BinNumSum(a, b string) string {
 	if len(a) > len(b) {
@@ -47,11 +53,6 @@ func BinNumSum(a, b string) string {
 	for i, j := 0, len(res)-1; i < j; i, j = i+1, j-1 {
 		res[i], res[j] = res[j], res[i]
 	}
-	// if len(string(res)) > 64 {
-	// 	res = res[len(res)-64:]
-	// 	res = strings.TrimPrefix(string(res), "0")
-	// 	return res
-	// }
 	re := string(res)
 	if len(res) > 64 {
 		re = re[len(re)-64:]
@@ -80,4 +81,7 @@ func main() {
 	fmt.Println("Enter two numbers:")
 	fmt.Scan(&a, &b)
 	fmt.Printf("%v * %v = %v\n", a, b, BinNumSum(a, b))
+	var z int64
+	fmt.Scan(&z)
+	fmt.Printf("%v = %v", z, NumToBin(z))
 }

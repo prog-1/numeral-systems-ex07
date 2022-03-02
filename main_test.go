@@ -6,6 +6,28 @@ import (
 )
 
 var testBinNumSum = BinNumSum
+var testNumToBin = NumToBin
+
+func TestNumToBin(t *testing.T) {
+	for _, tc := range []struct {
+		num  int64
+		want string
+	}{
+		{0, "0"},
+		{1, "1"},
+		{3, "11"},
+		{4, "100"},
+		{8, "1000"},
+		{-1, "1111111111111111111111111111111111111111111111111111111111111111"},
+		{-1, "1111111111111111111111111111111111111111111111111111111111111111"},
+		{1000_0000_0000_0000, "11100011010111111010100100110001101000000000000000"},
+		{-1000_0000_0000_0001, "1111111111111100011100101000000101011011001110010111111111111111"},
+	} {
+		if got := testNumToBin(tc.num); got != tc.want {
+			t.Errorf("NumToBin(%v) = %v, want = %v", tc.num, got, tc.want)
+		}
+	}
+}
 
 func TestBinNumSum(t *testing.T) {
 	for _, tc := range []struct {
@@ -30,7 +52,7 @@ var (
 	benchB = strings.Repeat("9", 1)
 )
 
-func BenchmarkLongMul(b *testing.B) {
+func BenchmarkBinNumSum(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		_ = testBinNumSum(benchA, benchB)
 	}
